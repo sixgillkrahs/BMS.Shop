@@ -43,5 +43,14 @@ public class RoleController {
         return repository;
     }
 
+    @PutMapping("/update/{id}")
+    public APIRepository<RoleDto> updateRole(@PathVariable UUID id, @RequestBody CreateUpdateRoleDto input){
+        APIRepository<RoleDto> repository = new APIRepository<>();
+        repository.setCode(1000);
+        repository.setResult(roleService.updateRole(id,input));
+        repository.setMessage("update role successfully");
+        return repository;
+    }
+
 
 }

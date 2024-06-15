@@ -45,8 +45,14 @@ public class RoleService implements IRoleService {
     }
 
     @Override
-    public RoleDto updateRole(UUID id, CreateUpdateRoleDto roleDto) {
-        return null;
+    public RoleDto updateRole(UUID id, CreateUpdateRoleDto input) {
+        Role role = roleRepository.findById(id)
+                .orElseThrow(()-> new HandleRuntimeException(ErrorCode.ROLE_NOT_FOUND));
+        role.setName(input.getName());
+        role.setNormalizedname(input.createNormalisedName());
+        role.setIsdefault(input.getIsdefault());
+        roleRepository.save(role);
+        return RoleMapper.toRoleDto(role);
     }
 
 
