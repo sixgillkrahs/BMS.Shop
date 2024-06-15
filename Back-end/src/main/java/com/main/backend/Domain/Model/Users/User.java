@@ -32,6 +32,19 @@ public class User {
     public Character isactive;
     public String avatarimage;
 
+    public User(String username, String normalizedusername, String name, String surname, String email, String normalizedemail, String password, String phonenumber, String phonenumbercomfirmed, Character isactive) {
+        this.username = username;
+        this.normalizedusername = normalizedusername;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.normalizedemail = normalizedemail;
+        this.password = password;
+        this.phonenumber = phonenumber;
+        this.phonenumbercomfirmed = phonenumbercomfirmed;
+        this.isactive = isactive;
+    }
+
     public User(String username, String normalizedusername, String name, String surname, String email, String normalizedemail, String password, String phonenumber, String phonenumbercomfirmed, Character isactive, String avatarimage) {
         this.username = username;
         this.normalizedusername = normalizedusername;
