@@ -5,12 +5,10 @@ import com.main.backend.Domain.Dto.Roles.CreateUpdateRoleDto;
 import com.main.backend.Domain.Dto.Roles.RoleDto;
 import com.main.backend.Service.Service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -34,6 +32,14 @@ public class RoleController {
         repository.setCode(1000);
         repository.setResult(roleService.saveRole(input));
         repository.setMessage("create role successfully");
+        return repository;
+    }
+
+    @GetMapping("/get/{id}")
+    public APIRepository<RoleDto> getRoleById(@PathVariable UUID id){
+        APIRepository<RoleDto> repository = new APIRepository<>();
+        repository.setCode(1000);
+        repository.setResult(roleService.getRoleById(id));
         return repository;
     }
 

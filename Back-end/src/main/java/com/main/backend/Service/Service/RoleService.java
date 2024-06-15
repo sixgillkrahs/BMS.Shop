@@ -5,6 +5,8 @@ import com.main.backend.Domain.Dto.Roles.RoleDto;
 import com.main.backend.Domain.Model.Roles.Role;
 import com.main.backend.Repository.RoleRepository;
 import com.main.backend.Service.IService.IRoleService;
+import com.main.backend.Utils.Exception.ErrorCode;
+import com.main.backend.Utils.Exception.HandleRuntimeException;
 import com.main.backend.Utils.Mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,7 +33,8 @@ public class RoleService implements IRoleService {
 
     @Override
     public RoleDto getRoleById(UUID id) {
-        return null;
+        return RoleMapper.toRoleDto(roleRepository.findById(id)
+                .orElseThrow(()-> new HandleRuntimeException(ErrorCode.ROLE_NOT_FOUND)));
     }
 
     @Override
