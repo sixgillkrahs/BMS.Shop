@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     public UserService userService;
 
-    
+
     @GetMapping("/all")
     public List<UserDto> getAllUser(){
         return userService.getAllUser();
