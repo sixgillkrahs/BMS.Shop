@@ -1,5 +1,6 @@
 package com.main.backend.Service.Service;
 
+import com.main.backend.Domain.Dto.Roles.CreateUpdateRoleDto;
 import com.main.backend.Domain.Dto.Roles.RoleDto;
 import com.main.backend.Domain.Model.Roles.Role;
 import com.main.backend.Repository.RoleRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class RoleService implements IRoleService {
@@ -25,6 +27,23 @@ public class RoleService implements IRoleService {
             roleDtoList.add(RoleMapper.toRoleDto(role));
         }
         return roleDtoList;
+    }
+
+    @Override
+    public RoleDto getRoleById(UUID id) {
+        return null;
+    }
+
+    @Override
+    public RoleDto saveRole(CreateUpdateRoleDto input) {
+        Role role = new Role(input.getName(),input.createNormalisedName(),input.getIsdefault());
+        roleRepository.save(role);
+        return RoleMapper.toRoleDto(role);
+    }
+
+    @Override
+    public RoleDto updateRole(UUID id, CreateUpdateRoleDto roleDto) {
+        return null;
     }
 
 
