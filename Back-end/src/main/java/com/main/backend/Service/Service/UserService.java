@@ -78,4 +78,23 @@ public class UserService implements IUserService {
                 .orElseThrow(()-> new HandleRuntimeException(ErrorCode.USER_NOT_FOUND)));
     }
 
+    @Override
+    public UserDto updateUser(UUID id, CreateUpdateUserDto input) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new HandleRuntimeException(ErrorCode.USER_NOT_FOUND));
+        PasswordEncoder pass = new BCryptPasswordEncoder(10);
+        user.setUsername(input.getUsername());
+        user.setNormalizedusername(input.createnormalizedusername());
+        user.setName(input.getName());
+        user.setSurname(input.getSurname());
+        user.setEmail(input.getEmail());
+        user.setNormalizedemail(input.createnormalizedemail());
+        user.setPassword(pass.encode(input.getPassword()));
+        user.setPhonenumber(input.getPhonenumber());
+        user.setIsactive(input.isactivestates());
+        user.setAvatarimage(input.getAvatarimage());
+        userRepository.save(user);
+        return UserMapper.toUserDto(user) ;
+    }
+
 }

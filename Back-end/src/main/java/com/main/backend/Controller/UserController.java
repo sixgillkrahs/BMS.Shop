@@ -35,10 +35,18 @@ public class UserController {
     }
 
     @GetMapping("/get/{id}")
-    public APIRepository<UserDto> getUserById(@PathVariable("id") UUID id){
+    public APIRepository<UserDto> getUserById(@PathVariable UUID id){
         APIRepository<UserDto> repository = new APIRepository<>();
         repository.setCode(1000);
         repository.setResult(userService.getUserById(id));
+        return repository;
+    }
+
+    @PutMapping("/update/{id}")
+    public APIRepository<UserDto> updateUser(@PathVariable UUID id, @Valid @RequestBody CreateUpdateUserDto input){
+        APIRepository<UserDto> repository = new APIRepository<>();
+        repository.setCode(1000);
+        repository.setResult(userService.updateUser(id, input));
         return repository;
     }
 
