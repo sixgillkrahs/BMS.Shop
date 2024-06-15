@@ -3,11 +3,10 @@ package com.main.backend.Controller;
 
 import com.main.backend.Domain.APIRepository;
 import com.main.backend.Domain.Dto.Categories.CategoryDto;
+import com.main.backend.Domain.Dto.Categories.CreateUpdateCategoryDto;
 import com.main.backend.Service.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,14 @@ public class CategoryController {
         APIRepository<List<CategoryDto>> repository = new APIRepository<>();
         repository.setCode(1000);
         repository.setResult(categoryService.getAllCategory());
+        return repository;
+    }
+
+    @PostMapping("/save")
+    public APIRepository<CategoryDto> saveCategory(@RequestBody CreateUpdateCategoryDto input){
+        APIRepository<CategoryDto> repository = new APIRepository<>();
+        repository.setCode(1000);
+        repository.setResult(categoryService.saveCategory(input));
         return repository;
     }
 

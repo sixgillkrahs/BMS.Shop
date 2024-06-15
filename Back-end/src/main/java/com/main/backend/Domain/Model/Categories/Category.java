@@ -21,4 +21,10 @@ public class Category {
     public UUID parentId;
     @Column(name = "isactive")
     public Character isActive;
+
+    public Category(String name, UUID parentId, Character isActive) {
+        this.name = name;
+        this.parentId = parentId;
+        this.isActive = isActive;
+    }
 }

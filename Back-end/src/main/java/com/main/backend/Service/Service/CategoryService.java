@@ -1,6 +1,7 @@
 package com.main.backend.Service.Service;
 
 import com.main.backend.Domain.Dto.Categories.CategoryDto;
+import com.main.backend.Domain.Dto.Categories.CreateUpdateCategoryDto;
 import com.main.backend.Domain.Model.Categories.Category;
 import com.main.backend.Repository.CategoryRepository;
 import com.main.backend.Service.IService.ICategoryService;
@@ -28,8 +29,11 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public CategoryDto saveCategory(CategoryDto input) {
-        return null;
+    public CategoryDto saveCategory(CreateUpdateCategoryDto input) {
+        categoryRepository.existsByName(input.getName());
+        Category category = new Category(input.getName(),input.getParentId(),input.getIsActive());
+        categoryRepository.save(category);
+        return CategoryMapper.toCategoryDto(category);
     }
 
     @Override
@@ -38,7 +42,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public CategoryDto updateCategory(UUID id, CategoryDto input) {
+    public CategoryDto updateCategory(UUID id, CreateUpdateCategoryDto input) {
         return null;
     }
 
