@@ -5,6 +5,7 @@ public enum ErrorCode {
     EMAIL_ALREADY_EXISTS(402, "Email already exists"),
     ROLE_NOT_FOUND (401, "Role not found"),
     CATEGORY_NOT_FOUND(401, "Category not found"),
+    MANUFACTURER_NOT_FOUND(401, "Manufacturer not found"),
     ;
 
     ErrorCode(int code, String message) {
