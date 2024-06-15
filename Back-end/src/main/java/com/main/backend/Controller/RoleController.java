@@ -52,5 +52,14 @@ public class RoleController {
         return repository;
     }
 
+    @DeleteMapping("/delete/{id}")
+    public APIRepository<String> deleteRole(@PathVariable UUID id){
+        APIRepository<String> repository = new APIRepository<>();
+        roleService.deleteRole(id);
+        repository.setCode(1000);
+        repository.setMessage("delete role successfully");
+        return repository;
+    }
+
 
 }

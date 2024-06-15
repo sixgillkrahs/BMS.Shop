@@ -55,5 +55,12 @@ public class RoleService implements IRoleService {
         return RoleMapper.toRoleDto(role);
     }
 
+    @Override
+    public void deleteRole(UUID id) {
+        Role role = roleRepository.findById(id)
+                .orElseThrow(()-> new HandleRuntimeException(ErrorCode.ROLE_NOT_FOUND));
+        roleRepository.delete(role);
+    }
+
 
 }

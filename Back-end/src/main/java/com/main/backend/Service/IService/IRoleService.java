@@ -18,4 +18,6 @@ public interface IRoleService {
     public RoleDto saveRole(CreateUpdateRoleDto roleDto);
 
     public RoleDto updateRole(UUID id, CreateUpdateRoleDto roleDto);
+
+    public void deleteRole(UUID id);
 }
