@@ -50,6 +50,15 @@ public class UserController {
         return repository;
     }
 
+    @DeleteMapping("/delete/{id}")
+    public APIRepository<String> deleteUser(@PathVariable UUID id){
+        APIRepository<String> repository = new APIRepository<>();
+        repository.setCode(1000);
+        userService.deleteUser(id);
+        repository.setMessage("delete user successfully");
+        return repository;
+    }
+
 
 
 

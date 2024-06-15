@@ -7,5 +7,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface UserRoleRepository extends JpaRepository<UserRole, UserRoleId> {
-//    Optional<UserRoles> findByUserRolesId(UserRolesId userRolesId);
 }

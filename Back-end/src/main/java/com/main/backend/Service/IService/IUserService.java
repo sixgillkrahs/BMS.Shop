@@ -15,4 +15,5 @@ public interface IUserService {
     public UserDto saveUser(CreateUpdateUserDto input);
     public UserDto getUserById(UUID id);
     public UserDto updateUser(UUID id, CreateUpdateUserDto input);
+    public void deleteUser(UUID id);
 }

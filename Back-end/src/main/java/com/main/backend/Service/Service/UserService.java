@@ -4,6 +4,7 @@ import com.main.backend.Domain.Dto.Users.CreateUpdateUserDto;
 import com.main.backend.Domain.Dto.Users.UserDto;
 import com.main.backend.Domain.Model.Roles.Role;
 import com.main.backend.Domain.Model.UserRoles.UserRole;
+import com.main.backend.Domain.Model.UserRoles.UserRoleId;
 import com.main.backend.Domain.Model.Users.User;
 import com.main.backend.Repository.RoleRepository;
 import com.main.backend.Repository.UserRepository;
@@ -95,6 +96,16 @@ public class UserService implements IUserService {
         user.setAvatarimage(input.getAvatarimage());
         userRepository.save(user);
         return UserMapper.toUserDto(user) ;
+    }
+
+    @Override
+    public void deleteUser(UUID id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new HandleRuntimeException(ErrorCode.USER_NOT_FOUND));
+        UUID roleId =  roleRepository.findRoleIdByUserId(id);
+        UserRoleId userRoleId = new UserRoleId(id,roleId);
+        userRoleRepository.deleteById(userRoleId);
+        userRepository.delete(user);
     }
 
 }
