@@ -60,6 +60,6 @@ public class ManufacturerController {
         repository.setMessage("delete manufacturer successfully");
         return repository;
     }
-    
+
 
 }
