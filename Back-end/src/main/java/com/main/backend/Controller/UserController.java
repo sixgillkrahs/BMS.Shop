@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -30,6 +31,14 @@ public class UserController {
         repository.setCode(1000);
         repository.setResult(userService.saveUser(input));
         repository.setMessage("create user successfully");
+        return repository;
+    }
+
+    @GetMapping("/get/{id}")
+    public APIRepository<UserDto> getUserById(@PathVariable("id") UUID id){
+        APIRepository<UserDto> repository = new APIRepository<>();
+        repository.setCode(1000);
+        repository.setResult(userService.getUserById(id));
         return repository;
     }
 

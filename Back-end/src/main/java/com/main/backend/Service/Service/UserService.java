@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class UserService implements IUserService {
@@ -69,6 +70,12 @@ public class UserService implements IUserService {
         UserRole userRoles = new UserRole(newUser.getId(), role.getId());
         userRoleRepository.save(userRoles);
         return UserMapper.toUserDto(newUser);
+    }
+
+    @Override
+    public UserDto getUserById(UUID id) {
+        return UserMapper.toUserDto(userRepository.findById(id)
+                .orElseThrow(()-> new HandleRuntimeException(ErrorCode.USER_NOT_FOUND)));
     }
 
 }
