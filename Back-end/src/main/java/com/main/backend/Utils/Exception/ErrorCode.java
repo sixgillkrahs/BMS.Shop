@@ -3,7 +3,8 @@ package com.main.backend.Utils.Exception;
 public enum ErrorCode {
     USER_NOT_FOUND(401, "User not found"),
     EMAIL_ALREADY_EXISTS(402, "Email already exists"),
-    ROLE_NOT_FOUND (403, "Role not found"),
+    ROLE_NOT_FOUND (401, "Role not found"),
+    CATEGORY_NOT_FOUND(401, "Category not found"),
     ;
 
     ErrorCode(int code, String message) {

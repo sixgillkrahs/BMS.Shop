@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/category")
@@ -32,6 +33,32 @@ public class CategoryController {
         repository.setResult(categoryService.saveCategory(input));
         return repository;
     }
+
+    @GetMapping("/get/{id}")
+    public APIRepository<CategoryDto> getCategoryById(@PathVariable UUID id){
+        APIRepository<CategoryDto> repository = new APIRepository<>();
+        repository.setCode(1000);
+        repository.setResult(categoryService.getCategoryById(id));
+        return repository;
+    }
+
+    @PutMapping("/update/{id}")
+    public APIRepository<CategoryDto> updateCategory(@PathVariable UUID id, @RequestBody CreateUpdateCategoryDto input){
+        APIRepository<CategoryDto> repository = new APIRepository<>();
+        repository.setCode(1000);
+        repository.setResult(categoryService.updateCategory(id, input));
+        return repository;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public APIRepository<String> deleteCategory(@PathVariable UUID id){
+        APIRepository<String> repository = new APIRepository<>();
+        repository.setCode(1000);
+        categoryService.deleteCategory(id);
+        repository.setMessage("delete category successfully");
+        return repository;
+    }
+
 
 
 }
