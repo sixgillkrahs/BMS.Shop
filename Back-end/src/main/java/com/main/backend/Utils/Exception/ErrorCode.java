@@ -6,6 +6,7 @@ public enum ErrorCode {
     ROLE_NOT_FOUND (401, "Role not found"),
     CATEGORY_NOT_FOUND(401, "Category not found"),
     MANUFACTURER_NOT_FOUND(401, "Manufacturer not found"),
+    PRODUCT_NOT_FOUND(401, "Product not found"),
     ;
 
     ErrorCode(int code, String message) {
