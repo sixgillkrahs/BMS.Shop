@@ -22,13 +22,6 @@ public class Product {
     @Column(name = "brand_id")
     public UUID brandId;
     public String name;
-    public double price;
-    @Column(name="created_at")
-    public Date created_At;
-    @Column(name="updated_at")
-    public Date updated_At;
-    public int promotion;
-    public int quantity;
     public String description;
     @Column(name="isactive")
     public Character isActive;

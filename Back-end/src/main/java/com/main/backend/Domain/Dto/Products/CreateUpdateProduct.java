@@ -15,12 +15,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateUpdateProduct {
     public String name;
-    public double price;
-    public Date updated_At;
-    public int promotion;
     public UUID categoryId;
     public UUID brandId;
-    public int quantity;
     public String description;
     public String thumnailimage;
     public Character isActive;

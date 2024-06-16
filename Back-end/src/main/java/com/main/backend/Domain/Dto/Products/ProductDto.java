@@ -15,11 +15,6 @@ import java.util.UUID;
 public class ProductDto {
     public UUID id ;
     public String name;
-    public double price;
-    public Date created_At;
-    public Date updated_At;
-    public int promotion;
-    public int quantity;
     public String description;
     public String categoryName;
     public String brandName;

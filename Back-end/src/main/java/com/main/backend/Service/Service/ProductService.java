@@ -57,15 +57,12 @@ public class ProductService implements IProductService {
         CategoryDto category =  categoryService.getCategoryById(input.categoryId);
         ManufacturerDto brand = manufacturerService.getManufacturerById(input.brandId);
         product.name = input.name;
-        product.price = input.price;
         product.categoryId = input.categoryId;
         product.brandId = input.brandId;
         product.categoryName = category.name;
         product.brandName = brand.name;
-        product.quantity = input.quantity;
         product.description = input.description;
         product.thumnailimage = input.thumnailimage;
-        product.promotion = input.promotion;
         product.isActive = input.isActive;
         productRepository.save(product);
         return ProductMapper.toProductDto(product);
@@ -77,17 +74,13 @@ public class ProductService implements IProductService {
         CategoryDto category =  categoryService.getCategoryById(input.categoryId);
         ManufacturerDto brand = manufacturerService.getManufacturerById(input.brandId);
         product.name = input.name;
-        product.price = input.price;
         product.categoryId = input.categoryId;
         product.brandId = input.brandId;
         product.categoryName = category.name;
         product.brandName = brand.name;
-        product.quantity = input.quantity;
         product.description = input.description;
         product.thumnailimage = input.thumnailimage;
-        product.promotion = input.promotion;
         product.isActive = input.isActive;
-        product.created_At = new Date(System.currentTimeMillis());
         productRepository.save(product);
         return ProductMapper.toProductDto(product);
     }
