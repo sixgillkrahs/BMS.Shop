@@ -39,8 +39,8 @@ const Header = () => {
                 <div className="col-lg-3">
                     <div className="header__right">
                         <div className="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
+                            <Link style={{textDecoration:'none' , color:'#626262'}} to='/login'>Login</Link>
+                            <Link style={{textDecoration:'none' , color:'#626262'}} to='/register'>Register</Link>
                         </div>
                          <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
