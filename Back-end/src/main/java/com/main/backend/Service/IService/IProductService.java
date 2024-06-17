@@ -31,5 +31,5 @@ public interface IProductService {
 
     public List<Size> getSizesByProductId(UUID id);
 
-
+    public String getThumnailImage(UUID id);
 }

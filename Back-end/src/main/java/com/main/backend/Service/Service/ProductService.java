@@ -125,7 +125,15 @@ public class ProductService implements IProductService {
         return productRepository.findSizesByProductId(id);
     }
 
-
+    @Override
+    public String getThumnailImage(UUID id) {
+        for (Product product : productRepository.findAll()) {
+            if (product.getId().equals(id)) {
+                return product.getThumnailimage();
+            }
+        }
+        return "";
+    }
 
 
 }

@@ -4,6 +4,8 @@ package com.main.backend.Service.IService;
 import com.main.backend.Domain.Dto.Users.CreateUpdateUserDto;
 import com.main.backend.Domain.Dto.Users.LoginDto;
 import com.main.backend.Domain.Dto.Users.UserDto;
+import com.main.backend.Domain.Model.Carts.Cart;
+import com.main.backend.Domain.Model.Carts.CartItem;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,4 +20,10 @@ public interface IUserService {
     public UserDto updateUser(UUID id, CreateUpdateUserDto input);
     public void deleteUser(UUID id);
     public boolean login(LoginDto loginDto);
+    public List<CartItem> getCartItem(UUID userId);
+    public void addToCart(CartItem cartItem);
+
+    public void removeFromCart(CartItem cartItem);
+
+    public Cart getCart(UUID userId);
 }

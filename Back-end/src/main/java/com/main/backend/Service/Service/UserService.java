@@ -3,13 +3,14 @@ package com.main.backend.Service.Service;
 import com.main.backend.Domain.Dto.Users.CreateUpdateUserDto;
 import com.main.backend.Domain.Dto.Users.LoginDto;
 import com.main.backend.Domain.Dto.Users.UserDto;
+import com.main.backend.Domain.Model.Carts.Cart;
+import com.main.backend.Domain.Model.Carts.CartItem;
+import com.main.backend.Domain.Model.Carts.CartItemId;
 import com.main.backend.Domain.Model.Roles.Role;
 import com.main.backend.Domain.Model.UserRoles.UserRole;
 import com.main.backend.Domain.Model.UserRoles.UserRoleId;
 import com.main.backend.Domain.Model.Users.User;
-import com.main.backend.Repository.RoleRepository;
-import com.main.backend.Repository.UserRepository;
-import com.main.backend.Repository.UserRoleRepository;
+import com.main.backend.Repository.*;
 import com.main.backend.Service.IService.IUserService;
 import com.main.backend.Utils.Exception.ErrorCode;
 import com.main.backend.Utils.Exception.HandleRuntimeException;
@@ -32,6 +33,14 @@ public class UserService implements IUserService {
     public RoleRepository roleRepository;
     @Autowired
     public UserRoleRepository userRoleRepository;
+    @Autowired
+    private CartRepository cartRepository;
+    @Autowired
+    private CartItemRepository cartItemRepository;
+    @Autowired
+    private StockService stockService;
+    @Autowired
+    private ProductService productService;
 
 
     @Override
@@ -118,6 +127,62 @@ public class UserService implements IUserService {
             throw new HandleRuntimeException(ErrorCode.WRONG_PASSWORD);
         }
         return true;
+    }
+
+    @Override
+    public List<CartItem> getCartItem(UUID userId) {
+        Cart cart = cartRepository.findByUserId(userId);
+        if(cart != null){
+            List<CartItem> cartItemList = cartItemRepository.findByCartItemId(cart.getId());
+            return cartItemList;
+        }
+        return List.of();
+    }
+
+    public void addToCart(CartItem cartItem){
+        CartItemId cartItemId = new CartItemId(cartItem.getCartid(), cartItem.getProductid(),cartItem.getColorid(),cartItem.getSizeid());
+        CartItem cartItem1 = cartItemRepository.findById(cartItemId).orElse(null);
+        if(cartItem1 == null){
+            cartItem1 = new CartItem();
+            cartItem1.setCartid(cartItem.getCartid());
+            cartItem1.setProductid(cartItem.getProductid());
+            cartItem1.setQuantity(cartItem.getQuantity());
+            cartItem1.setPrice(cartItem.getPrice());
+            cartItem1.setSizeid(cartItem.getSizeid());
+            cartItem1.setColorid(cartItem.getColorid());
+            cartItem1.setProductname(cartItem.getProductname());
+            cartItem1.setColorname(stockService.getNameColorbyId(cartItem.getColorid()));
+            cartItem1.setSizename(stockService.getNameSizebyId(cartItem.getSizeid()));
+            cartItem1.setThumnailimage(productService.getThumnailImage(cartItem.getProductid()));
+            cartItemRepository.save(cartItem1);
+            Cart cart = cartRepository.findById(cartItem1.getCartid()).get();
+            cart.setTotal(cart.getTotal() + (cartItem.getQuantity() * cartItem.getPrice()));
+            cartRepository.save(cart);
+            return;
+        }
+        Cart cart = cartRepository.findById(cartItem.getCartid()).get();
+        cart.setTotal(cart.getTotal() + cartItem.getQuantity() * cartItem.getPrice());
+        System.out.println(cartItem1);
+        cartItem1.setQuantity(cartItem1.getQuantity() + cartItem.getQuantity());
+        cartItemRepository.save(cartItem1);
+    }
+
+
+    @Override
+    public void removeFromCart(CartItem cartItem) {
+        CartItemId cartItemId = new CartItemId(cartItem.getCartid(), cartItem.getProductid(),cartItem.getColorid(),cartItem.getSizeid());
+        CartItem cartItem1 = cartItemRepository.findById(cartItemId).orElse(null);
+        if(cartItem1 != null){
+            Cart cart = cartRepository.findById(cartItem1.getCartid()).get();
+            cart.setTotal(cart.getTotal() - cartItem1.getQuantity() * cartItem1.getPrice());
+            cartRepository.save(cart);
+            cartItemRepository.deleteById(cartItemId);
+        }
+    }
+
+    @Override
+    public Cart getCart(UUID userId) {
+        return cartRepository.findByUserId(userId);
     }
 
 }

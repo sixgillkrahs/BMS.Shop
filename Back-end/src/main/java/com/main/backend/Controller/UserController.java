@@ -4,6 +4,8 @@ import com.main.backend.Domain.APIRepository;
 import com.main.backend.Domain.Dto.Users.CreateUpdateUserDto;
 import com.main.backend.Domain.Dto.Users.LoginDto;
 import com.main.backend.Domain.Dto.Users.UserDto;
+import com.main.backend.Domain.Model.Carts.Cart;
+import com.main.backend.Domain.Model.Carts.CartItem;
 import com.main.backend.Service.Service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +90,34 @@ public class UserController {
         userService.login(input);
         repository.setMessage("login successfully");
         return repository;
+    }
+
+    @CrossOrigin
+    @GetMapping("/cart/{userId}")
+    public List<CartItem> getCartItem(@PathVariable UUID userId){
+        return userService.getCartItem(userId);
+    }
+
+
+    @CrossOrigin
+    @PostMapping("/cart/add")
+    public Map<String,String> addToCart(@RequestBody CartItem cartItem){
+        System.out.println(cartItem);
+        userService.addToCart(cartItem);
+        return Map.of("message","Added to cart");
+    }
+
+    @CrossOrigin
+    @PostMapping("/cart/remove")
+    public Map<String,String> removeFromCart(@RequestBody CartItem cartItem){
+        userService.removeFromCart(cartItem);
+        return Map.of("message","Removed from cart");
+    }
+
+    @CrossOrigin
+    @GetMapping("/cart/cart/{userId}")
+    public Cart getCart(@PathVariable UUID userId){
+        return userService.getCart(userId);
     }
 
 
