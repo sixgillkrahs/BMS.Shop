@@ -1,0 +1,86 @@
+.sidebar__filter {
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.sidebar__filter .section-title {
+    margin-bottom: 50px;
+}
+
+.sidebar__filter .section-title h4 {
+    font-size: 18px;
+}
+
+.sidebar__filter a {
+    font-size: 14px;
+    color: #0d0d0d;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    display: inline-block;
+    padding: 5px 16px 5px 24px;
+    border: 2px solid #ff0000;
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    border-radius: 2px;
+}
+
+.filter-range-wrap .range-slider .price-input {
+    position: relative;
+}
+
+.filter-range-wrap .range-slider .price-input p {
+    font-size: 16px;
+    color: #0d0d0d;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.filter-range-wrap .range-slider .price-input:after {
+    position: absolute;
+    left: 81px;
+    top: 12px;
+    height: 1px;
+    width: 5px;
+    background: #0d0d0d;
+    content: "";
+}
+
+.filter-range-wrap .range-slider .price-input input {
+    font-size: 16px;
+    color: #0d0d0d;
+    max-width: 16%;
+    border: none;
+}
+
+.filter-range-wrap .range-slider .price-input input:nth-child(1) {
+    margin-right: 28px;
+}
+
+.filter-range-wrap .price-range {
+    border-radius: 0;
+    margin-bottom: 28px;
+}
+
+.filter-range-wrap .price-range.ui-widget-content {
+    border: none;
+    background: rgba(0, 0, 0, 0.1);
+    height: 5px;
+}
+
+.filter-range-wrap .price-range.ui-widget-content .ui-slider-handle {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #ca1515;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.filter-range-wrap .price-range .ui-slider-range {
+    background: #ca1515;
+    border-radius: 0;
+}

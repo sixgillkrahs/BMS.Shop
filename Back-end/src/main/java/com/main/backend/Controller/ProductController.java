@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     public ProductService productService;
 
-
+    @CrossOrigin
     @GetMapping("/all")
     public APIRepository<List<ProductDto>> getAllProducts(){
         APIRepository<List<ProductDto>> repository = new APIRepository<>();
@@ -27,6 +27,7 @@ public class ProductController {
         return repository;
     }
 
+    @CrossOrigin
     @GetMapping("/get/{id}")
     public APIRepository<ProductDto> getProductById(@PathVariable UUID id){
         APIRepository<ProductDto> repository = new APIRepository<>();

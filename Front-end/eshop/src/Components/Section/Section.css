@@ -1,0 +1,35 @@
+.shop {
+    padding-top: 70px;
+    padding-bottom: 80px;
+}
+
+.pagination__option a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    border: 1px solid #f2f2f2;
+    border-radius: 50%;
+    font-size: 14px;
+    color: #111111;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+    -webkit-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s;
+    margin-right: 6px;
+}
+
+.pagination__option a:last-child {
+    margin-right: 0;
+}
+
+.pagination__option a i {
+    font-weight: 600;
+}
+
+.pagination__option a:hover {
+    background: #0d0d0d;
+    border-color: #0d0d0d;
+    color: #ffffff;
+}

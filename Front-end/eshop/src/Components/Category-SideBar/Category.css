@@ -1,0 +1,96 @@
+.sidebar__categories {
+    margin-bottom: 50px;
+}
+
+.sidebar__categories .section-title {
+    margin-bottom: 35px;
+}
+
+.sidebar__categories .section-title h4 {
+    font-size: 18px;
+}
+
+.categories__accordion .card {
+    border: none;
+    border-radius: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f2f2f2 !important;
+    margin-bottom: 12px;
+}
+
+.categories__accordion .card:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none !important;
+}
+
+.categories__accordion .card-heading {
+    cursor: pointer;
+}
+
+.categories__accordion .card-heading a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    display: block;
+}
+
+.categories__accordion .card-body {
+    padding-left: 0;
+    padding-top: 6px;
+    padding-bottom: 0;
+}
+
+.categories__accordion .card-body li {
+    list-style: none;
+    position: relative;
+    padding-left: 16px;
+}
+
+.categories__accordion .card-body li:before {
+    position: absolute;
+    left: 4px;
+    top: 14px;
+    height: 1px;
+    width: 4px;
+    background: #666666;
+    content: "";
+}
+
+.categories__accordion .card-body li a {
+    font-size: 14px;
+    color: #666666;
+    line-height: 30px;
+}
+
+.categories__accordion .card-heading a:after,
+.categories__accordion .card-heading>a.active[aria-expanded=false]:after {
+    content: "";
+    font-size: 14px;
+    font-family: "FontAwesome";
+    color: #666666;
+    position: absolute;
+    right: 30px;
+    top: 0px;
+}
+
+.categories__accordion .card-heading.active a:after {
+    content: "";
+    font-size: 14px;
+    font-family: "FontAwesome";
+    color: #666666;
+    position: absolute;
+    right: 30px;
+    top: -1px;
+}
+
+.categories__accordion .card-heading a[aria-expanded=true]:after,
+.categories__accordion .card-heading>a.active:after {
+    content: "";
+    font-size: 14px;
+    font-family: "FontAwesome";
+    color: #666666;
+    position: absolute;
+    right: 30px;
+    top: -1px;
+}
