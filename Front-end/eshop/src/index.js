@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './CSS/elegant-icons.css';
+import './CSS/font-awesome.min.css';
+import './CSS/magnific-popup.css'
+import './CSS/owl.carousel.min.css'
+import './CSS/slicknav.min.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ShopContext from './Context/ShopContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <React.StrictMode>
-    <App />
+    <ShopContext>
+      <App />
+    </ShopContext>
   </React.StrictMode>
 );
 
