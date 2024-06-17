@@ -7,6 +7,8 @@ public enum ErrorCode {
     CATEGORY_NOT_FOUND(401, "Category not found"),
     MANUFACTURER_NOT_FOUND(401, "Manufacturer not found"),
     PRODUCT_NOT_FOUND(401, "Product not found"),
+    WRONG_PASSWORD(401, "Wrong password"),
+    EMAIL_NOT_FOUND(401, "Email not found"),
     ;
 
     ErrorCode(int code, String message) {

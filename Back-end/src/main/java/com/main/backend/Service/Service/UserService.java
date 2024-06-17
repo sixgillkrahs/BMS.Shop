@@ -1,6 +1,7 @@
 package com.main.backend.Service.Service;
 
 import com.main.backend.Domain.Dto.Users.CreateUpdateUserDto;
+import com.main.backend.Domain.Dto.Users.LoginDto;
 import com.main.backend.Domain.Dto.Users.UserDto;
 import com.main.backend.Domain.Model.Roles.Role;
 import com.main.backend.Domain.Model.UserRoles.UserRole;
@@ -106,6 +107,17 @@ public class UserService implements IUserService {
         UserRoleId userRoleId = new UserRoleId(id,roleId);
         userRoleRepository.deleteById(userRoleId);
         userRepository.delete(user);
+    }
+
+    @Override
+    public boolean login(LoginDto loginDto) {
+        System.out.println(loginDto.email);
+        User user = userRepository.findByEmail(loginDto.email).orElseThrow(() -> new HandleRuntimeException(ErrorCode.EMAIL_NOT_FOUND));
+        PasswordEncoder pass = new BCryptPasswordEncoder(10);
+        if(!pass.matches(loginDto.getPassword(), user.getPassword())){
+            throw new HandleRuntimeException(ErrorCode.WRONG_PASSWORD);
+        }
+        return true;
     }
 
 }
