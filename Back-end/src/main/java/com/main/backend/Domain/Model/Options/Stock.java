@@ -19,7 +19,7 @@ public class Stock {
     public UUID id;
     @Column(name = "qty_in_stock")
     public int quantity;
-    @Column(name = "product_id")
+    @Column(name = "product_item_id")
     public UUID productId;
     @Column(name = "size_id")
     public UUID sizeId;
@@ -33,8 +33,9 @@ public class Stock {
     public String productName;
     public String image;
     public String sku;
+    public double price;
 
-    public Stock(int quantity, UUID productId, UUID sizeId, UUID colorId, String sizeName, String colorName, String productName, String image, String sku) {
+    public Stock(int quantity, UUID productId, UUID sizeId, UUID colorId, String sizeName, String colorName, String productName, String image, String sku, double price) {
         this.quantity = quantity;
         this.productId = productId;
         this.sizeId = sizeId;
@@ -44,5 +45,6 @@ public class Stock {
         this.productName = productName;
         this.image = image;
         this.sku = sku;
+        this.price = price;
     }
 }

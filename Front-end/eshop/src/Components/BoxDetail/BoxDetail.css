@@ -331,11 +331,23 @@
     content: "";
 }
 
-.product__details__widget ul li .color__checkbox label .checkmark.black-bg {
-    background: #111111;
+.product__details__widget ul li .color__checkbox label .checkmark.Black {
+    background: #000000;
 }
 
-.product__details__widget ul li .color__checkbox label .checkmark.grey-bg {
+.product__details__widget ul li .color__checkbox label .checkmark.Blue {
+    background: #0000FF;
+}
+
+.product__details__widget ul li .color__checkbox label .checkmark.Yellow {
+    background: #FFFF00;
+}
+
+.product__details__widget ul li .color__checkbox label .checkmark.White {
+    background: #aeaeae;
+}
+
+.product__details__widget ul li .color__checkbox label .checkmark.Gray {
     background: #e4aa8b;
 }
 

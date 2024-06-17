@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useContext, useEffect, useState} from 'react'
 import './BoxDetail.css'
 const image1 = require('../Assets/img/product/details/thumb-1.jpg');
 const image2 = require('../Assets/img/product/details/thumb-2.jpg');
@@ -10,8 +10,22 @@ const product3 = require('../Assets/img/product/details/product-3.jpg');
 const product4 = require('../Assets/img/product/details/product-4.jpg');
 
 const BoxDetail = (props) => {
-    const {product} =props
-
+    const {product , option ,color ,size} =props
+    const [form, setForm] = useState({
+        cartid: '1ea21f2c-19a9-48a4-83ad-a0f3610741d2',
+        productid: product.id,
+        productname: product.name,
+        colorid: '',
+        sizeid: '',
+        quantity: '1',
+        price: product.price,
+        image:product.thumnailimage
+    });
+    const [colorId,setColorId] =useState('')
+    const [sizeId,setSizeId]=useState('')
+    console.log(sizeId)
+   
+    
 
   return (
     <section class="product-details spad">
@@ -45,7 +59,7 @@ const BoxDetail = (props) => {
                 </div>
                 <div class="col-lg-6">
                     <div class="product__details__text">
-                        <h3>Essential structured blazer <span>Brand: SKMEIMore Men Watches from SKMEI</span></h3>
+                        <h3>{product.name} <span>Brand: {product.brandName}</span></h3>
                         <div class="rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -55,8 +69,7 @@ const BoxDetail = (props) => {
                             <span>( 138 reviews )</span>
                         </div>
                         <div class="product__details__price">$ 75.0 <span>$ 83.0</span></div>
-                        <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
-                        magni lores eos qui ratione voluptatem sequi nesciunt.</p>
+                        <p>{product.description}</p>
                         <div class="product__details__button">
                             <div class="quantity">
                                 <span>Quantity:</span>
@@ -82,44 +95,33 @@ const BoxDetail = (props) => {
                                         </label>
                                     </div>
                                 </li>
+                                {color?
                                 <li>
                                     <span>Available color:</span>
                                     <div class="color__checkbox">
-                                        <label for="red">
-                                            <input type="radio" name="color__radio" id="red" checked/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label for="black">
-                                            <input type="radio" name="color__radio" id="black"/>
-                                            <span class="checkmark black-bg"></span>
-                                        </label>
-                                        <label for="grey">
-                                            <input type="radio" name="color__radio" id="grey"/>
-                                            <span class="checkmark grey-bg"></span>
-                                        </label>
+                                        {color.map((item)=>{
+                                            return  <label for={item.name}>
+                                                        <input type="radio" name="color__radio"  onClick={()=>{setColorId(item.id)}} id={item.name}/>
+                                                        <span class={`checkmark ${item.name}`}></span>
+                                                    </label>
+                                        })}
                                     </div>
                                 </li>
+                                :<></> }
+                                {size ?
                                 <li>
                                     <span>Available size:</span>
                                     <div class="size__btn">
-                                        <label for="xs-btn" class="active">
-                                            <input type="radio" id="xs-btn"/>
-                                            xs
-                                        </label>
-                                        <label for="s-btn">
-                                            <input type="radio" id="s-btn"/>
-                                            s
-                                        </label>
-                                        <label for="m-btn">
-                                            <input type="radio" id="m-btn"/>
-                                            m
-                                        </label>
-                                        <label for="l-btn">
-                                            <input type="radio" id="l-btn"/>
-                                            l
-                                        </label>
+                                        {size.map((item)=>{
+                                        return  <label for="xs-btn" >
+                                                    <input onClick={()=>{setSizeId(item.id)}}  type="radio" id="xs-btn" />
+                                                    {item.name}
+                                                </label>
+                                        })}
+                                       
                                     </div>
                                 </li>
+                                :<></>}
                                 <li>
                                     <span>Promotions:</span>
                                     <p>Free shipping</p>

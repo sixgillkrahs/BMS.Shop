@@ -5,9 +5,13 @@ import com.main.backend.Domain.Dto.Manufacturers.ManufacturerDto;
 import com.main.backend.Domain.Dto.Options.CreateUpdateStockDto;
 import com.main.backend.Domain.Dto.Products.CreateUpdateProduct;
 import com.main.backend.Domain.Dto.Products.ProductDto;
+import com.main.backend.Domain.Dto.Users.LoginDto;
+import com.main.backend.Domain.Model.Options.Color;
+import com.main.backend.Domain.Model.Options.Size;
 import com.main.backend.Domain.Model.Options.Stock;
 import com.main.backend.Domain.Model.Products.Product;
 import com.main.backend.Repository.ProductRepository;
+import com.main.backend.Repository.UserRepository;
 import com.main.backend.Service.IService.IProductService;
 import com.main.backend.Utils.Exception.ErrorCode;
 import com.main.backend.Utils.Exception.HandleRuntimeException;
@@ -29,6 +33,10 @@ public class ProductService implements IProductService {
     public CategoryService categoryService;
     @Autowired
     public ManufacturerService manufacturerService;
+    @Autowired
+    private StockService stockService;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<ProductDto> getAllProducts() {
@@ -95,8 +103,29 @@ public class ProductService implements IProductService {
 
     @Override
     public Stock addStock(CreateUpdateStockDto stock, UUID productId) {
-        return null;
+        stock.productId = productId;
+        String colorName = stockService.getNameColorbyId(stock.colorId);
+        String sizeName = stockService.getNameSizebyId(stock.sizeId);
+        Stock stock1 = new Stock(stock.quantity, stock.productId,stock.sizeId,stock.colorId,sizeName,colorName,null,stock.image,stock.sku,stock.price);
+        return stockService.addStock(stock1);
     }
+
+    @Override
+    public List<Stock> getStocksByProductId(UUID id) {
+        return stockService.getStocksByProductId(id);
+    }
+
+    @Override
+    public List<Color> getColorsByProductId(UUID id) {
+        return productRepository.findColorsByProductId(id);
+    }
+
+    @Override
+    public List<Size> getSizesByProductId(UUID id) {
+        return productRepository.findSizesByProductId(id);
+    }
+
+
 
 
 }

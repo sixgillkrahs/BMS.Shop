@@ -15,3 +15,5 @@ public interface IStockService {
     public String getNameColorbyId(UUID id);
     public List<Stock> getStocksByProductId(UUID id);
 }
+
+

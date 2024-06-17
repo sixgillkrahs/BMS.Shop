@@ -9,4 +9,5 @@ public class CreateUpdateStockDto {
     public UUID colorId;
     public String image;
     public String sku;
+    public double price;
 }

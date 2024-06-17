@@ -3,6 +3,9 @@ package com.main.backend.Service.IService;
 import com.main.backend.Domain.Dto.Options.CreateUpdateStockDto;
 import com.main.backend.Domain.Dto.Products.CreateUpdateProduct;
 import com.main.backend.Domain.Dto.Products.ProductDto;
+import com.main.backend.Domain.Dto.Users.LoginDto;
+import com.main.backend.Domain.Model.Options.Color;
+import com.main.backend.Domain.Model.Options.Size;
 import com.main.backend.Domain.Model.Options.Stock;
 import org.springframework.stereotype.Service;
 
@@ -21,4 +24,12 @@ public interface IProductService {
     public void deleteProduct(UUID id);
 
     public Stock addStock(CreateUpdateStockDto stock, UUID productId);
+
+    public List<Stock> getStocksByProductId(UUID id);
+
+    public List<Color> getColorsByProductId(UUID id);
+
+    public List<Size> getSizesByProductId(UUID id);
+
+
 }
