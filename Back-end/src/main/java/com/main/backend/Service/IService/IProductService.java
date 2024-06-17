@@ -1,7 +1,9 @@
 package com.main.backend.Service.IService;
 
+import com.main.backend.Domain.Dto.Options.CreateUpdateStockDto;
 import com.main.backend.Domain.Dto.Products.CreateUpdateProduct;
 import com.main.backend.Domain.Dto.Products.ProductDto;
+import com.main.backend.Domain.Model.Options.Stock;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,4 +19,6 @@ public interface IProductService {
     public ProductDto saveProduct(CreateUpdateProduct input);
 
     public void deleteProduct(UUID id);
+
+    public Stock addStock(CreateUpdateStockDto stock, UUID productId);
 }

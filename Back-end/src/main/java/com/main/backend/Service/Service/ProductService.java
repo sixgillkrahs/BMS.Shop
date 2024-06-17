@@ -2,8 +2,10 @@ package com.main.backend.Service.Service;
 
 import com.main.backend.Domain.Dto.Categories.CategoryDto;
 import com.main.backend.Domain.Dto.Manufacturers.ManufacturerDto;
+import com.main.backend.Domain.Dto.Options.CreateUpdateStockDto;
 import com.main.backend.Domain.Dto.Products.CreateUpdateProduct;
 import com.main.backend.Domain.Dto.Products.ProductDto;
+import com.main.backend.Domain.Model.Options.Stock;
 import com.main.backend.Domain.Model.Products.Product;
 import com.main.backend.Repository.ProductRepository;
 import com.main.backend.Service.IService.IProductService;
@@ -89,6 +91,11 @@ public class ProductService implements IProductService {
     public void deleteProduct(UUID id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new HandleRuntimeException(ErrorCode.PRODUCT_NOT_FOUND));
         productRepository.delete(product);
+    }
+
+    @Override
+    public Stock addStock(CreateUpdateStockDto stock, UUID productId) {
+        return null;
     }
 
 
