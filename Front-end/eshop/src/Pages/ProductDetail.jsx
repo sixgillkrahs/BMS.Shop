@@ -33,7 +33,7 @@ const ProductDetail = () => {
     return (
 
     <div>
-      <Breadcrum category={product.categoryName} product = {product.name}/>
+      <Breadcrum category={product.categoryName} product = {product.name} param ={'Shop'}/>
       <BoxDetail product={product} option={option.result} color={color} size={size}/>
     </div>
   )

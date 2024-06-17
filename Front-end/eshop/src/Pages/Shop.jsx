@@ -7,7 +7,7 @@ const Shop = () => {
 
   return (
     <div>
-      <Breadcrum/>
+      <Breadcrum param={'Shop'}/>
       <Section/>
     </div>
   )

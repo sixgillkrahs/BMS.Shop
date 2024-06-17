@@ -6,6 +6,7 @@ import Index from './Pages/Index';
 import Shop from './Pages/Shop';
 import ProductDetail from './Pages/ProductDetail';
 import LoginRegister from './Pages/LoginRegister';
+import Cart from './Pages/Cart';
 
 
 const {BrowserRouter,Routes,Route} = require('react-router-dom');
@@ -23,6 +24,7 @@ function App() {
           </Route>
           <Route path='/login' element={<LoginRegister/>}></Route>
           <Route path='/register' element={<LoginRegister/>}></Route>
+          <Route path='/cart' element={<Cart/>}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>
