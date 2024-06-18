@@ -94,8 +94,11 @@ public class UserController {
 
     @CrossOrigin
     @GetMapping("/cart/{userId}")
-    public List<CartItem> getCartItem(@PathVariable UUID userId){
-        return userService.getCartItem(userId);
+    public APIRepository<List<CartItem>> getCartItem(@PathVariable UUID userId){
+        APIRepository<List<CartItem>> repository = new APIRepository<>();
+        repository.setCode(1000);
+        repository.setResult(userService.getCartItem(userId));
+        return repository;
     }
 
 
