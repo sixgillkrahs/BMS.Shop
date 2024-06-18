@@ -3,6 +3,7 @@ package com.main.backend.Service.Service;
 import com.main.backend.Domain.Dto.Categories.CategoryDto;
 import com.main.backend.Domain.Dto.Manufacturers.ManufacturerDto;
 import com.main.backend.Domain.Dto.Options.CreateUpdateStockDto;
+import com.main.backend.Domain.Dto.Options.SelectedOption;
 import com.main.backend.Domain.Dto.Products.CreateUpdateProduct;
 import com.main.backend.Domain.Dto.Products.ProductDto;
 import com.main.backend.Domain.Dto.Users.LoginDto;
@@ -133,6 +134,16 @@ public class ProductService implements IProductService {
             }
         }
         return "";
+    }
+
+    @Override
+    public Stock getStockbyColorAndSize(UUID productId, SelectedOption input) {
+        for (Stock stock : stockService.getStocksByProductId(productId)) {
+            if (stock.colorId.equals(input.getColorid()) || stock.sizeId.equals(input.getSizeid())) {
+                return stock;
+            }
+        }
+        return null;
     }
 
 

@@ -119,14 +119,27 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean login(LoginDto loginDto) {
+    public UserDto login(LoginDto loginDto) {
         System.out.println(loginDto.email);
         User user = userRepository.findByEmail(loginDto.email).orElseThrow(() -> new HandleRuntimeException(ErrorCode.EMAIL_NOT_FOUND));
         PasswordEncoder pass = new BCryptPasswordEncoder(10);
         if(!pass.matches(loginDto.getPassword(), user.getPassword())){
             throw new HandleRuntimeException(ErrorCode.WRONG_PASSWORD);
         }
-        return true;
+        Cart cart = cartRepository.findByUserId(user.getId());
+        if(cart == null){
+            cart = new Cart();
+            cart.setUserId(user.getId());
+            cart.setUserName(user.getName());
+            cart.setUserAddress("Hà Nội");
+            cart.setUserPhone(user.getPhonenumber());
+            cart.setStatus(0);
+            cart.setShippingFee(0);
+            cart.setTotal(0);
+            cart.setDiscount(0);
+            cartRepository.save(cart);
+        }
+        return UserMapper.toUserDto(user);
     }
 
     @Override

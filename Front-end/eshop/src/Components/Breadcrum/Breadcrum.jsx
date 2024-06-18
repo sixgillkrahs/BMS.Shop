@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 const Breadcrum = (props) => {
     const {product,param,category} = props
-    console.log(param)
   return (
     <div className="breadcrumb-option">
         <div className="container">

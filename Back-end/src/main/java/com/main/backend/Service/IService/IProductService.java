@@ -1,6 +1,7 @@
 package com.main.backend.Service.IService;
 
 import com.main.backend.Domain.Dto.Options.CreateUpdateStockDto;
+import com.main.backend.Domain.Dto.Options.SelectedOption;
 import com.main.backend.Domain.Dto.Products.CreateUpdateProduct;
 import com.main.backend.Domain.Dto.Products.ProductDto;
 import com.main.backend.Domain.Dto.Users.LoginDto;
@@ -32,4 +33,6 @@ public interface IProductService {
     public List<Size> getSizesByProductId(UUID id);
 
     public String getThumnailImage(UUID id);
+
+    public Stock getStockbyColorAndSize(UUID productId, SelectedOption input);
 }

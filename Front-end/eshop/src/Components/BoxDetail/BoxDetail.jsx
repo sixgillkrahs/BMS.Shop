@@ -10,7 +10,9 @@ const product3 = require('../Assets/img/product/details/product-3.jpg');
 const product4 = require('../Assets/img/product/details/product-4.jpg');
 
 const BoxDetail = (props) => {
-    const {product , option ,color ,size} =props
+    const urlAddToCart = "http://localhost:8080/api/v1/user/cart/add";
+    const {product,color,option ,size} = props
+    const [pro,setpro] = useState({})
     const [form, setForm] = useState({
         cartid: '1ea21f2c-19a9-48a4-83ad-a0f3610741d2',
         productid: product.id,
@@ -19,13 +21,38 @@ const BoxDetail = (props) => {
         sizeid: '',
         quantity: '1',
         price: product.price,
-        image:product.thumnailimage
+        image: product.thumnailimage
     });
-    const [colorId,setColorId] =useState('')
-    const [sizeId,setSizeId]=useState('')
-    console.log(sizeId)
-   
-    
+    // console.log(form)
+    const handleColorClick = (colorId) => {
+        setForm({ ...form, colorid: colorId });
+    };
+    const changeHandler = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value })
+    }
+    const handleSizeClick = (sizeId) => {
+        setForm({ ...form, sizeid: sizeId });
+    };
+
+    useEffect(() => {
+        if (form.colorid != '' && form.sizeid != '') {
+            const selectedOption = option.filter(item => item.colorId === form.colorid && item.sizeId === form.sizeid);
+            if (selectedOption) {
+                setpro(selectedOption[0])
+                
+            }
+        }
+    }, [form.colorid, form.sizeid]);
+    console.log(pro)
+
+    const addToCart =async () => {
+        // const aa =await addCart(urlAddToCart,form);
+        // setmesage(aa.message)
+        setTimeout(() => {
+            // setmesage("")
+        }, 1000);
+    }
+
 
   return (
     <section class="product-details spad">
@@ -34,10 +61,11 @@ const BoxDetail = (props) => {
                 <div class="col-lg-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
-                            <a class="pt active" href="#product-1">
+                            
+                            {/* <a class="pt active" href="#product-1">
                                 <img src={image1} alt=""/>
-                            </a>
-                            <a class="pt" href="#product-2">
+                            </a> */}
+                            {/* <a class="pt" href="#product-2">
                                 <img src={image2} alt=""/>
                             </a>
                             <a class="pt" href="#product-3">
@@ -45,14 +73,17 @@ const BoxDetail = (props) => {
                             </a>
                             <a class="pt" href="#product-4">
                                 <img src={image4} alt=""/>
-                            </a>
+                            </a> */}
                         </div>
                         <div class="product__details__slider__content">
-                            <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-1" class="product__big__img" src={product1} alt=""/>
+                            <div class="">
+                                {/* <img data-hash="product-1" class="product__big__img" src={product1} alt=""/>
                                 <img data-hash="product-2" class="product__big__img" src={product2} alt=""/>
                                 <img data-hash="product-3" class="product__big__img" src={product3} alt=""/>
-                                <img data-hash="product-4" class="product__big__img" src={product4} alt=""/>
+                                <img data-hash="product-4" class="product__big__img" src={product4} alt=""/> */}
+                                {pro.image?<img src={pro.image} style={{width :'100%'}}/> : <img style={{width :'100%'}} src={product.thumnailimage}/>}
+                                {/* <img src={product.thumnailimage}/> */}
+                               
                             </div>
                         </div>
                     </div>
@@ -68,13 +99,13 @@ const BoxDetail = (props) => {
                             <i class="fa fa-star"></i>
                             <span>( 138 reviews )</span>
                         </div>
-                        <div class="product__details__price">$ 75.0 <span>$ 83.0</span></div>
+                        <div class="product__details__price">{pro.price? `$${pro.price}` : '$54'}</div>
                         <p>{product.description}</p>
                         <div class="product__details__button">
                             <div class="quantity">
                                 <span>Quantity:</span>
                                 <div class="pro-qty">
-                                    <input type="text" value="1"/>
+                                    <input type="text" name='quantity' value={form.quantity} onChange= {changeHandler} />
                                 </div>
                             </div>
                             <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
@@ -89,9 +120,9 @@ const BoxDetail = (props) => {
                                     <span>Availability:</span>
                                     <div class="stock__checkbox">
                                         <label for="stockin">
-                                            In Stock
-                                            <input type="checkbox" id="stockin"/>
-                                            <span class="checkmark"></span>
+                                            {pro?pro.quantity:<></>} In Stock
+                                            {/* <input type="checkbox" id="stockin"/> */}
+                                            {/* <span class="checkmark"></span> */}
                                         </label>
                                     </div>
                                 </li>
@@ -101,7 +132,7 @@ const BoxDetail = (props) => {
                                     <div class="color__checkbox">
                                         {color.map((item)=>{
                                             return  <label for={item.name}>
-                                                        <input type="radio" name="color__radio"  onClick={()=>{setColorId(item.id)}} id={item.name}/>
+                                                        <input type="radio" name="color__radio"  onClick={()=>{ handleColorClick(item.id);}} id={item.name}/>
                                                         <span class={`checkmark ${item.name}`}></span>
                                                     </label>
                                         })}
@@ -113,8 +144,8 @@ const BoxDetail = (props) => {
                                     <span>Available size:</span>
                                     <div class="size__btn">
                                         {size.map((item)=>{
-                                        return  <label for="xs-btn" >
-                                                    <input onClick={()=>{setSizeId(item.id)}}  type="radio" id="xs-btn" />
+                                        return  <label for={item.id} onClick={()=>{handleSizeClick(item.id)}} >
+                                                    <input type="radio" id={item.id} />
                                                     {item.name}
                                                 </label>
                                         })}

@@ -14,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
 public class MinioService {
     private final MinioClient minioClient;
@@ -23,7 +24,7 @@ public class MinioService {
     public MinioService() throws MinioException {
         minioClient = MinioClient.builder()
                 .endpoint(END_POINT)
-                .credentials("vCow8ZXxeznbEKryftld", "xiH0BlJKiJFTVEPl3uhOrzdpBySpK1bSV3qdOZlv")
+                .credentials("LwtDxGVRLYXI2jPhelzL", "xgV91o9Q4kHPGMACi3YCqMTzS4oaL9Bt4dAHHFaJ")
                 .build();
     }
 

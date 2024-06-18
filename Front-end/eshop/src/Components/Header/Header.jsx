@@ -38,15 +38,11 @@ const Header = () => {
                 </div>
                 <div className="col-lg-3">
                     <div className="header__right">
-                        <div className="header__right__auth">
-                            <Link style={{textDecoration:'none' , color:'#626262'}} to='/login'>Login</Link>
-                            <Link style={{textDecoration:'none' , color:'#626262'}} to='/register'>Register</Link>
-                        </div>
                          <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
                             <li>
                                 <Link style={{textDecoration:'none' , color:'#626262'}} to='/wishlish'>
-                                    <span class="icon_search search-switch"></span>
+                                    <span class="icon_heart_alt"></span>
                                     <div class="tip">2</div>
                                 </Link>
                             </li>
@@ -57,6 +53,17 @@ const Header = () => {
                                 </Link>
                             </li>
                         </ul>
+                        {
+                        !localStorage.getItem('userid')?
+                        <div className="header__right__auth">
+                            <Link style={{textDecoration:'none' , color:'#626262'}} to='/login'>Login</Link>
+                            <Link style={{textDecoration:'none' , color:'#626262'}} to='/register'>Register</Link>
+                        </div>
+                        :
+                        <div className="header__right__auth">
+                             <Link style={{textDecoration:'none' , color:'#626262'}}  onClick={()=>{localStorage.removeItem('userid')}}>Logout</Link>
+                        </div>
+                        }
                     </div>
                 </div>
             </div>

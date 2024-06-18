@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { cloneElement, useState } from 'react'
 import './Css/LoginRegister.css'
 
 
@@ -47,7 +47,8 @@ const LoginRegister = () => {
         dataRes = await loginFetch(urlLogin,form)
         if (dataRes.code === 1000) {
             log = true;
-            localStorage.setItem('userid', dataRes.id)
+            console.log(dataRes.result.id)
+            localStorage.setItem('userid', dataRes.result.id)
             window.location.replace('/')
         } else {
             setmesage(dataRes.message)
