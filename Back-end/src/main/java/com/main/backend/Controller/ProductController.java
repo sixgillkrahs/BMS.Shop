@@ -3,6 +3,7 @@ package com.main.backend.Controller;
 
 import com.main.backend.Domain.APIRepository;
 import com.main.backend.Domain.Dto.Options.CreateUpdateStockDto;
+import com.main.backend.Domain.Dto.Options.SelectedOption;
 import com.main.backend.Domain.Dto.Products.CreateUpdateProduct;
 import com.main.backend.Domain.Dto.Products.ProductDto;
 import com.main.backend.Domain.Model.Options.Color;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1/product")
 public class ProductController {
@@ -94,6 +96,14 @@ public class ProductController {
         APIRepository<List<Size>> repository = new APIRepository<>();
         repository.setCode(1000);
         repository.setResult(productService.getSizesByProductId(id));
+        return repository;
+    }
+
+    @GetMapping("/getbycolorandsize/{productId}")
+    public APIRepository<Stock> getStockbyColorAndSize(@PathVariable UUID productId, @RequestBody SelectedOption input){
+        APIRepository<Stock> repository = new APIRepository<>();
+        repository.setCode(1000);
+        repository.setResult(productService.getStockbyColorAndSize(productId, input));
         return repository;
     }
 

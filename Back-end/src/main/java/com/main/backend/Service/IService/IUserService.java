@@ -19,7 +19,7 @@ public interface IUserService {
     public UserDto getUserById(UUID id);
     public UserDto updateUser(UUID id, CreateUpdateUserDto input);
     public void deleteUser(UUID id);
-    public boolean login(LoginDto loginDto);
+    public UserDto login(LoginDto loginDto);
     public List<CartItem> getCartItem(UUID userId);
     public void addToCart(CartItem cartItem);
 

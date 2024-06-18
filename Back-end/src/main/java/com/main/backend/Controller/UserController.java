@@ -84,10 +84,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public APIRepository<String> Login(@Valid @RequestBody LoginDto input){
-        APIRepository<String> repository = new APIRepository<>();
+    public APIRepository<UserDto> Login(@Valid @RequestBody LoginDto input){
+        APIRepository<UserDto> repository = new APIRepository<>();
         repository.setCode(1000);
-        userService.login(input);
+        repository.setResult(userService.login(input));
         repository.setMessage("login successfully");
         return repository;
     }

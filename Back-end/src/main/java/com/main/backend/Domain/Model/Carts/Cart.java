@@ -23,12 +23,12 @@ public class Cart {
     @Column(name = "total")
     private double total;
     private double discount;
-    @Column(name = "customer_id")
+    @Column(name = "user_id")
     private UUID userId;
-    @Column(name = "customer_name")
+    @Column(name = "user_name")
     private String userName;
-    @Column(name = "customer_address")
+    @Column(name = "user_address")
     private String userAddress;
-    @Column(name = "customer_phone")
+    @Column(name = "user_phone")
     private String userPhone;
 }
