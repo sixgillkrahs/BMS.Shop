@@ -11,19 +11,29 @@ const product4 = require('../Assets/img/product/details/product-4.jpg');
 
 const BoxDetail = (props) => {
     const urlAddToCart = "http://localhost:8080/api/v1/user/cart/add";
-    const {product,color,option ,size} = props
+    const {product,color,option ,size,cart} = props
     const [pro,setpro] = useState({})
     const [form, setForm] = useState({
-        cartid: '1ea21f2c-19a9-48a4-83ad-a0f3610741d2',
+        cartid: '',
         productid: product.id,
         productname: product.name,
         colorid: '',
         sizeid: '',
         quantity: '1',
-        price: product.price,
-        image: product.thumnailimage
+        price: '',
+        image: ''
     });
-    // console.log(form)
+    const addCart = async (url,form) => {
+        return (await fetch(url,{
+            method:"POST",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(form)
+        })).json();
+    }
+    console.log(form)
     const handleColorClick = (colorId) => {
         setForm({ ...form, colorid: colorId });
     };
@@ -43,10 +53,18 @@ const BoxDetail = (props) => {
             }
         }
     }, [form.colorid, form.sizeid]);
-    console.log(pro)
-
     const addToCart =async () => {
-        // const aa =await addCart(urlAddToCart,form);
+        if(cart.id == null){
+             window.location.replace('/login')
+             return;
+        }
+        form.image = pro.image
+        form.price = pro.price
+        form.productid = product.id
+        form.productname = product.name
+        form.cartid = cart.id
+        console.log(form)
+        const aa =await addCart(urlAddToCart,form);
         // setmesage(aa.message)
         setTimeout(() => {
             // setmesage("")
@@ -108,7 +126,7 @@ const BoxDetail = (props) => {
                                     <input type="text" name='quantity' value={form.quantity} onChange= {changeHandler} />
                                 </div>
                             </div>
-                            <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                            <a style={{cursor:'pointer'}} onClick={()=>{addToCart()}} class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
                             <ul>
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
