@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './CartItem.css'
+import { Context } from '../../Context/ShopContext'
 
 const CartItem = (props) => {
+    const {cart} = useContext(Context);
     const {cartitem} = props
-    console.log(cartitem)
 
   return (
     <section class="shop-cart spad">
@@ -79,8 +80,8 @@ const CartItem = (props) => {
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>$ 750.0</span></li>
-                            <li>Total <span>$ 750.0</span></li>
+                            <li>Subtotal <span>${cart.total}</span></li>
+                            <li>Total <span>${cart.total}</span></li>
                         </ul>
                         <a href="#" class="primary-btn">Proceed to checkout</a>
                     </div>

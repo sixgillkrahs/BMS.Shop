@@ -9,14 +9,13 @@ const ProductDetail = () => {
     const urlOption = `http://localhost:8080/api/v1/product/stocks/${id}`;
     const urlColor = `http://localhost:8080/api/v1/product/colors/${id}`
     const urlSize = `http://localhost:8080/api/v1/product/sizes/${id}`
-    const urlcart = `http://localhost:8080/api/v1/user/cart/cart/${userid}`
+    // const urlcart = `http://localhost:8080/api/v1/user/cart/cart/${userid}`
     const url = `http://localhost:8080/api/v1/product/get/${id}`
-   
     const [product,setproduct] = useState({})
     const [option, setoption] = useState([])
     const [size,setSize] = useState([])
     const [color,setColor] =useState([])
-    const [cart,setCart] =useState([])
+    // const [cart,setCart] =useState([])
     const fetchhandle = async (url) => {
         return (await fetch(url)).json();
     }
@@ -26,10 +25,10 @@ const ProductDetail = () => {
             const option = await fetchhandle(urlOption);
             const color = await fetchhandle(urlColor);
             const Size = await fetchhandle(urlSize);
-            if(userid){
-              const cart = await fetchhandle(urlcart);
-              setCart(cart)
-            }
+            // if(userid){
+            //   const cart = await fetchhandle(urlcart);
+            //   setCart(cart)
+            // }
             setproduct(product.result)
             setoption(option);
             setColor(color.result)
@@ -42,7 +41,7 @@ const ProductDetail = () => {
 
     <div>
       <Breadcrum category={product.categoryName} product = {product.name} param ={'Shop'}/>
-      <BoxDetail product={product} option={option.result} color={color} size={size} cart={cart}/>
+      <BoxDetail product={product} option={option.result} color={color} size={size} />
     </div>
   )
 }

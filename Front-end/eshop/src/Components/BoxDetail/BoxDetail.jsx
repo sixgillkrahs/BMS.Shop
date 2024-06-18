@@ -1,5 +1,6 @@
 import React ,{useContext, useEffect, useState} from 'react'
 import './BoxDetail.css'
+import { Context } from '../../Context/ShopContext';
 const image1 = require('../Assets/img/product/details/thumb-1.jpg');
 const image2 = require('../Assets/img/product/details/thumb-2.jpg');
 const image3 = require('../Assets/img/product/details/thumb-3.jpg');
@@ -10,8 +11,9 @@ const product3 = require('../Assets/img/product/details/product-3.jpg');
 const product4 = require('../Assets/img/product/details/product-4.jpg');
 
 const BoxDetail = (props) => {
+    const {cart} = useContext(Context)
     const urlAddToCart = "http://localhost:8080/api/v1/user/cart/add";
-    const {product,color,option ,size,cart} = props
+    const {product,color,option ,size} = props
     const [pro,setpro] = useState({})
     const [form, setForm] = useState({
         cartid: '',
